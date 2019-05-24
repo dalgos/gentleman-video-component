@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "jsx": "react",
+    "module": "commonjs",
+    "strict": true,
+    "pretty": true,
+    "noImplicitAny": false,
+    "baseUrl": "./src",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+  },
+  "exclude": [
+    "node_modules",
+  ],
+  "include": [
+    "src/**/*"
+  ]
+}

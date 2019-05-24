@@ -1,0 +1,51 @@
+{
+    "name": "gentleman-video-component",
+    "version": "0.1.0",
+    "description": "React Video Component",
+    "main": "src/index.tsx",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gentlemen-labs/gentleman-video-component.git"
+    },
+    "keywords": [
+        "react",
+        "video",
+        "component",
+        "javascript"
+    ],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/gentlemen-labs/gentleman-video-component/issues"
+    },
+    "homepage": "https://github.com/gentlemen-labs/gentleman-video-component#readme",
+    "devDependencies": {
+        "@types/classnames": "^2.2.7",
+        "@types/react": "^16.8.18",
+        "@types/react-dom": "^16.8.4",
+        "@types/react-lottie": "^1.2.2",
+        "classnames": "^2.2.6",
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6",
+        "react-lottie": "^1.2.3",
+        "tslint": "^5.16.0",
+        "tslint-config-gentleman": "^0.1.1",
+        "tslint-eslint-rules": "^5.4.0",
+        "tslint-react": "^4.0.0",
+        "typescript": "^3.4.5"
+    },
+    "dependencies": {
+        "@types/styled-components": "^4.1.15",
+        "styled-components": "^4.2.0"
+    },
+    "bit": {
+        "env": {
+            "compiler": "bit.envs/compilers/react-typescript@3.0.1"
+        },
+        "componentsDefaultDirectory": "components/{name}",
+        "packageManager": "npm"
+    }
+}
