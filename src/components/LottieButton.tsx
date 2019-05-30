@@ -22,10 +22,10 @@ type Reducer = React.Reducer<LottieProps, LottieAction>
 const StyledButton = styled.button`
   border: 0;
   background: none;
+  cursor: pointer;
 `
 
 const reducer: Reducer = (state, { type, animationData }) => {
-  console.log(type)
   switch (type) {
     case 'PLAY':
       return {
