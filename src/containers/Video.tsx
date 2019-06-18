@@ -3,6 +3,7 @@ import styled, { StyledComponent } from 'styled-components'
 import classnames from 'classnames'
 
 import { usePlayerStateValue } from '../context'
+import HLSVideo from '../components/HLSVideo'
 
 export interface Props {
   width?: string;
@@ -19,17 +20,17 @@ interface StyledVideoProps {
   maxHeight: string;
 }
 
-const StyledVideo = styled.video`
+const StyledVideo = styled(HLSVideo)`
   display: block;
-  transition: width .3s ease-in-out, height .3s ease-in-out;
+  transition: width .3s ease-in-out, height .3s ease-in-out, margin .3s ease-in-out;
   border-radius: 8px;
   ${({ width, height, maxWidth, maxHeight }: StyledVideoProps) => {
     return `
       width: ${width};
-      height: ${height};
+      margin-top: -50%;
       &.extended {
         width: ${maxWidth};
-        height: ${maxHeight};
+        margin-top: 0;
       }
     `
   }}
@@ -43,7 +44,7 @@ const Video: React.FunctionComponent<Props> = ({
   width = '416px',
   height = '416px',
 }) => {
-  const [{ isMuted, isVideoMaximized, volume }] = usePlayerStateValue()
+  const [{ isMuted, isVideoMaximized, url, volume }] = usePlayerStateValue()
   return (
     <StyledVideo
       id="mediaPlayer"
@@ -52,6 +53,9 @@ const Video: React.FunctionComponent<Props> = ({
       width={width}
       height={height}
       className={classnames({ extended: isVideoMaximized })}
+      url={url}
+      isMute={true}
+      volume={0}
     />
   )
 }

@@ -1,5 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import { getHours, getMinutes, getSeconds } from 'date-fns'
 
 import { usePlayerStateValue } from '../context'
 import MaximizeButton from './MaximizeButton'
@@ -8,6 +9,8 @@ import TimeDisplay from '../components/TimeDisplay'
 interface Props {
   className?: string;
 }
+
+const { useEffect, useState } = React
 
 const Wrapper = styled.div`
   position: absolute;
@@ -28,10 +31,20 @@ const StyledTimeDisplay = styled(TimeDisplay)`
 `
 
 const TopControls: React.FunctionComponent<Props> = ({ className }) => {
+  const { 0: { endTime } } = usePlayerStateValue()
+  const { 0: remainTime, 1: updateRemainTime } = useState(endTime - (new Date()).getTime())
+  const { 0: displayTime, 1: updateDisplayTime } = useState('00:00:00')
+  useEffect(() => {
+    updateDisplayTime(`${getHours(remainTime)}:${getMinutes(remainTime)}:${getSeconds(remainTime)}`)
+  }, [endTime, remainTime])
+
+  useEffect(() => {
+    // setInterval(() => updateRemainTime((prev) => prev - 1000), 1000)
+  }, [])
   return (
     <Wrapper className={className}>
       <MaximizeButton />
-      <StyledTimeDisplay displayTime="59:59:59" />
+      <StyledTimeDisplay displayTime={displayTime} remainTime={remainTime} />
     </Wrapper>
   )
 }
