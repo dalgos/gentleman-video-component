@@ -1,11 +1,15 @@
 import * as React from 'react'
 import styled from 'styled-components'
 
+import { getDateFromUTC } from '../utils'
+
 interface Props {
   className?: string;
   displayTime: string;
-
+  remainTime: number;
 }
+
+const { memo, useEffect, useState } = React
 
 const Wrapper = styled.div`
   background-color: #F27935;
@@ -25,12 +29,21 @@ const Wrapper = styled.div`
   }
 `
 
-export default ({ className, displayTime = '00:00:00' }: Props) => {
+export default memo(({ className, remainTime: remainTimeProp }: Props) => {
+  const { 0: remainTime, 1: updateRemainTime } = useState(remainTimeProp)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      updateRemainTime((prev) => prev - 1000)
+    }, 1000)
+    return () => {
+      interval && clearInterval(interval)
+    }
+  }, [])
   return (
     <Wrapper className={className}>
       <div>
-        <span>{displayTime}</span>
+        <span>{getDateFromUTC(remainTime).getString()}</span>
       </div>
     </Wrapper>
   )
-}
+})
