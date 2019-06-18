@@ -2,9 +2,19 @@
     "name": "@gentlemen/live-player",
     "version": "0.1.3",
     "description": "React Video Component",
-    "main": "src/index.tsx",
+    "main": "dist/index.js",
+    "module": "dist/index.es.js",
+    "files": [
+        "dist"
+    ],
+    "types": "dist/index.d.ts",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "rollup -c",
+        "prepublish": "in-publish && npm run build"
+    },
+    "publishConfig": {
+        "access": "public"
     },
     "repository": {
         "type": "git",
@@ -32,16 +42,22 @@
         "date-fns": "^1.30.1",
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
+        "rollup-plugin-commonjs": "^10.0.0",
+        "rollup-plugin-json": "^4.0.0",
+        "rollup-plugin-typescript": "^1.0.1",
+        "rollup-plugin-typescript2": "^0.21.2",
         "styled-components": "^4.3.1",
+        "tslib": "^1.10.0",
         "tslint": "^5.16.0",
         "tslint-config-gentleman": "^0.1.1",
         "tslint-eslint-rules": "^5.4.0",
         "tslint-react": "^4.0.0",
-        "typescript": "^3.4.5"
+        "typescript": "^3.5.2"
     },
     "dependencies": {
         "@types/react-lottie": "^1.2.2",
         "hls.js": "^0.12.4",
+        "in-publish": "^2.0.0",
         "react-lottie": "^1.2.3"
     },
     "peerDependencies": {
