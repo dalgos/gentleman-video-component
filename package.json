@@ -24,10 +24,13 @@
     "homepage": "https://github.com/gentlemen-labs/gentleman-video-component#readme",
     "devDependencies": {
         "@types/classnames": "^2.2.7",
+        "@types/hls.js": "^0.12.4",
         "@types/react": "^16.8.18",
         "@types/react-dom": "^16.8.4",
         "@types/react-lottie": "^1.2.2",
         "classnames": "^2.2.6",
+        "date-fns": "^1.30.1",
+        "hls.js": "^0.12.4",
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
         "react-lottie": "^1.2.3",
