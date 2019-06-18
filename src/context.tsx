@@ -9,9 +9,11 @@ export enum ACTION_TYPES {
 }
 
 export interface PlayerState {
+  endTime: number;
   isMuted: boolean;
   isVideoMaximized: boolean;
   onToggleVideoSize: (isMaximized?: boolean) => void;
+  url: string;
   volume: number;
 }
 
@@ -33,9 +35,11 @@ type PlayerReducer = Reducer<PlayerState, PlayerAction>
 type PlayerContextType = [ReducerState<PlayerReducer>, Dispatch<ReducerAction<PlayerReducer>>]
 
 const PlayerContext = createContext<PlayerContextType>([{
+  endTime: -1,
   isMuted: true,
   isVideoMaximized: false,
   onToggleVideoSize: () => {},
+  url: '',
   volume: 0,
 }, (state: any) => state])
 

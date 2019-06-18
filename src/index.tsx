@@ -10,9 +10,10 @@ import BottomControls from './containers/BottomControls'
 
 interface Props {
   className?: string;
+  endTime?: number;
   isControllable?: boolean;
   isMaximized?: boolean;
-  uri: string;
+  url: string;
   width?: string;
   maxWidth?: string;
   height?: string;
@@ -42,6 +43,7 @@ const StyledBottomControls = styled(BottomControls)`
 
 const App: React.FunctionComponent<Props> = ({
   className,
+  endTime = -1,
   isControllable = true,
   isMaximized = false,
   height,
@@ -49,6 +51,7 @@ const App: React.FunctionComponent<Props> = ({
   width,
   maxWidth,
   onToggleVideoSize = () => {},
+  url,
 }) => {
 
   const { 0: isHover, 1: handleHover } = useState(true)
@@ -63,9 +66,11 @@ const App: React.FunctionComponent<Props> = ({
   return (
     <PlayerProvider
       initialState={{
+        endTime,
         isMuted: true,
         isVideoMaximized: isMaximized,
         onToggleVideoSize,
+        url,
         volume: 0,
       }}
     >
