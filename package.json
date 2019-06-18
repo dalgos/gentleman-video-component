@@ -1,6 +1,6 @@
 {
     "name": "@gentlemen/live-player",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "React Video Component",
     "main": "src/index.tsx",
     "scripts": {
