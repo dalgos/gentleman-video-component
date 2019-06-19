@@ -14,9 +14,9 @@ const Wrapper = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  padding-top: 3rem;
+  padding-top: 4rem;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, .2));
-  height: 48px;
+  height: 64px;
   line-height: 1;
   vertical-align: top;
   border-radius: 0 0 8px 8px;

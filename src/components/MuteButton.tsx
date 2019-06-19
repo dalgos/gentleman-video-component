@@ -31,5 +31,6 @@ const MuteButton = styled.button`
   padding: 0;
   cursor: pointer;
   outline: none;
+  margin: 8px;
 `
 export default MuteButton
