@@ -1,9 +1,6 @@
 import * as React from 'react'
 import HLS, { Events as HLSEvents } from 'hls.js'
 import ID3 from 'hls.js/src/demux/id3'
-import PropTypes from 'prop-types'
-
-// import QuizManager from '../../modules/QuizManager'
 
 const hlsConfig = {}
 
@@ -20,7 +17,7 @@ interface Props {
   volume: number;
 }
 
-const { useEffect, useRef, useState } = React
+const { useEffect, useRef } = React
 
 interface CreateHLSParams {
   onFragChange?: (url: string) => void;
@@ -50,8 +47,7 @@ function createHLS({
   url,
   videoElement,
 }: CreateHLSParams): HLS {
-  const hls = new HLS({})
-  console.log(url)
+  const hls = new HLS(hlsConfig)
   hls.loadSource(url)
   hls.attachMedia(videoElement)
   hls.on(HLSEvents.MANIFEST_PARSED, () => {
@@ -83,7 +79,13 @@ const HLSVideo: React.FunctionComponent<Props> = ({
 
   useEffect(() => {
     videoRef.current && createHLS({ onFragChange, onFragParsingMetadata, url, videoElement: videoRef.current })
-  }, [isMute, onFragChange, onFragParsingMetadata, url, volume, videoRef])
+  }, [onFragChange, onFragParsingMetadata, videoRef])
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.volume = volume
+    }
+  }, [volume])
 
   return (
     <video
@@ -97,4 +99,4 @@ const HLSVideo: React.FunctionComponent<Props> = ({
   )
 }
 
-export default HLSVideo
+export default React.memo(HLSVideo)

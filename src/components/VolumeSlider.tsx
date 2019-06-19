@@ -5,6 +5,7 @@ interface Props {
   className?: string;
   onVolumeChange?: (volume: number) => void;
   value: number;
+  isMuted: boolean;
 }
 
 const Wrapper = styled.div`
@@ -60,13 +61,14 @@ const Wrapper = styled.div`
     }
   }
 `
-
+const SLIDER_WIDTH = 44
 const getVolume = (x: number, base = 287, min = 0, max = 44) => Math.max(Math.min(x - base, max), min)
 
 const VolumeRange: React.FunctionComponent<Props> = ({
   className,
   onVolumeChange,
-  value = 0,
+  value,
+  isMuted,
 }) => {
   const { 0: volume, 1: updateVolume } = React.useState(value)
   const sliderRef = React.useRef<HTMLDivElement>(null)
@@ -88,20 +90,17 @@ const VolumeRange: React.FunctionComponent<Props> = ({
     document.body.removeEventListener('mouseleave', clearMouseEvent)
   }
 
-  React.useEffect(() => {
-    onVolumeChange && onVolumeChange(Math.floor(volume * (100 / 44)))
-  }, [volume])
-
   const handleMouseMove = (evt: MouseEvent) => {
     if (sliderRef && sliderRef.current) {
       const domRect = sliderRef.current.getBoundingClientRect() as DOMRect
       const volume = getVolume(evt.clientX, domRect.x, 0, domRect.width - 12)
-      updateVolume(volume)
+      updateVolume(volume / SLIDER_WIDTH)
+      onVolumeChange && onVolumeChange(volume / SLIDER_WIDTH)
     }
   }
 
   return (
-    <Wrapper className={className} role="slider" dragX={volume}>
+    <Wrapper className={className} role="slider" dragX={isMuted ? 0 : (volume * SLIDER_WIDTH)}>
       <div className="_volume-slider" ref={sliderRef} draggable={true} onDragStart={handleDrag} onMouseDown={handleMouseDown}>
         <div className="_slider-handle" />
       </div>
