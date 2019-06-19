@@ -9,8 +9,9 @@ import LottieButton from '../components/LottieButton'
 interface Props {}
 
 const StyledLottieButton = styled(LottieButton)`
-  padding: 12px;
+  margin: 20px;
   box-sizing: border-box;
+  padding: 0;
 `
 
 const MaximizeButton: React.FunctionComponent<Props> = () => {
