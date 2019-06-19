@@ -40,6 +40,7 @@ const BottomControls: React.FunctionComponent<Props> = ({ className }) => {
   const { 0: { volume, isMuted }, 1: dispatch } = usePlayerStateValue()
   const handleVolumeChange = (value: number) => dispatch(updateVolumeAction(value))
   const handleSpeakerClick = () => dispatch(muteVolumeAction())
+
   return (
     <Wrapper className={className}>
       <ControlWrapper>
@@ -51,10 +52,11 @@ const BottomControls: React.FunctionComponent<Props> = ({ className }) => {
         <StyledVolumeRange
           onVolumeChange={handleVolumeChange}
           value={volume}
+          isMuted={isMuted}
         />
       </ControlWrapper>
     </Wrapper>
   )
 }
 
-export default BottomControls
+export default React.memo(BottomControls)

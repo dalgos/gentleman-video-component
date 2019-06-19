@@ -6,9 +6,7 @@ import maximizeAnimationData from '../assets/json/ic_maximise_w_24.json'
 import minimizeAnimationData from '../assets/json/ic_minimize_w_24.json'
 import LottieButton from '../components/LottieButton'
 
-interface Props {
-  
-}
+interface Props {}
 
 const StyledLottieButton = styled(LottieButton)`
   padding: 12px;

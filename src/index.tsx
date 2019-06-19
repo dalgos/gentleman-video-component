@@ -71,7 +71,7 @@ const App: React.FunctionComponent<Props> = ({
         isVideoMaximized: isMaximized,
         onToggleVideoSize,
         url,
-        volume: 0,
+        volume: 0.5,
       }}
     >
       <Wrapper

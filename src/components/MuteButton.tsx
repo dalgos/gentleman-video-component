@@ -1,5 +1,4 @@
-import * as React from 'react'
-import styled, { ThemedStyledFunction } from 'styled-components'
+import styled from 'styled-components'
 
 interface Props {
   isMuted: boolean;
@@ -18,7 +17,7 @@ const MuteButton = styled.button`
     } else {
       if (volume === 0) {
         return '-96'
-      } else if (volume < 51) {
+      } else if (volume < 0.5) {
         return '-48'
       } else {
         return '0'
