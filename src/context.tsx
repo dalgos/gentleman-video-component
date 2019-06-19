@@ -40,7 +40,7 @@ const PlayerContext = createContext<PlayerContextType>([{
   isVideoMaximized: false,
   onToggleVideoSize: () => {},
   url: '',
-  volume: 0,
+  volume: 0.5,
 }, (state: any) => state])
 
 interface PlayerProviderProps {
@@ -49,7 +49,6 @@ interface PlayerProviderProps {
 }
 
 const reducer = (state: PlayerState, action: PlayerAction) => {
-  console.log(action)
   switch(action.type) {
     case ACTION_TYPES.MAXIMIZED_VIDEO:
     case ACTION_TYPES.MINIMIZED_VIDEO:
