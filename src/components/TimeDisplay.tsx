@@ -33,7 +33,7 @@ export default memo(({ className, remainTime: remainTimeProp }: Props) => {
   const { 0: remainTime, 1: updateRemainTime } = useState(remainTimeProp)
   useEffect(() => {
     const interval = setInterval(() => {
-      updateRemainTime((prev) => prev - 1000)
+      updateRemainTime((prev) => Math.max(prev - 1000, 0))
     }, 1000)
     return () => {
       interval && clearInterval(interval)
