@@ -11,7 +11,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "rollup -c",
-        "prepublish": "in-publish && npm run build"
+        "prepublishOnly": "in-publish && npm run build"
     },
     "publishConfig": {
         "access": "public"
