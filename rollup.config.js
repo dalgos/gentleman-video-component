@@ -19,6 +19,7 @@ export default {
   plugins: [
     typescript({
       typescript: require('typescript'),
+      target: 'es5',
     }),
     json(),
     commonjs({
