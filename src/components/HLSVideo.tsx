@@ -1,6 +1,6 @@
 import * as React from 'react'
 import HLS, { Events as HLSEvents } from 'hls.js'
-import ID3 from 'hls.js/src/demux/id3'
+import ID3 from 'utils/id3'
 
 const hlsConfig = {}
 

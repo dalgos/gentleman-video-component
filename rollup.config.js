@@ -1,6 +1,7 @@
 import typescript from 'rollup-plugin-typescript2'
 import json from 'rollup-plugin-json'
 import commonjs from 'rollup-plugin-commonjs'
+import babel from 'rollup-plugin-babel'
 
 import pkg from './package.json'
 
@@ -23,7 +24,8 @@ export default {
     }),
     json(),
     commonjs({
-      include: 'node_modules/**'
+      include: 'node_modules/**',
     }),
+    babel(),
   ]
 }

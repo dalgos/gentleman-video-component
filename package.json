@@ -34,6 +34,8 @@
     },
     "homepage": "https://github.com/gentlemen-labs/gentleman-video-component#readme",
     "devDependencies": {
+        "@babel/core": "^7.4.5",
+        "@babel/preset-env": "^7.4.5",
         "@types/classnames": "^2.2.7",
         "@types/hls.js": "^0.12.4",
         "@types/react": "^16.8.18",
@@ -44,6 +46,7 @@
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
         "rollup": "^1.15.6",
+        "rollup-plugin-babel": "^4.3.3",
         "rollup-plugin-commonjs": "^10.0.0",
         "rollup-plugin-json": "^4.0.0",
         "rollup-plugin-typescript": "^1.0.1",
