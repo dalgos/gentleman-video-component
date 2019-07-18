@@ -7,12 +7,15 @@ import Wrapper from './elements/Wrapper'
 import Video from './containers/Video'
 import TopControls from './containers/TopControls'
 import BottomControls from './containers/BottomControls'
+import { debounce } from 'lodash'
 
-interface Props {
+export interface Props {
   className?: string;
   endTime?: number;
   isControllable?: boolean;
+  isHover?: boolean;
   isMaximized?: boolean;
+  isUseHover?: boolean;
   url: string;
   width?: string;
   maxWidth?: string;
@@ -24,6 +27,9 @@ interface Props {
 }
 
 const { useEffect, useState } = React
+
+// mouseleave 이벤트 발생 시 delay ms
+const LEAVE_DELAY = 3000
 
 const StyledTopControls = styled(TopControls)`
   opacity: 0;
@@ -45,7 +51,9 @@ const App: React.FunctionComponent<Props> = ({
   className,
   endTime = -1,
   isControllable = true,
+  isHover: isHoverProps = true,
   isMaximized = false,
+  isUseHover = true,
   height,
   maxHeight,
   width,
@@ -53,15 +61,22 @@ const App: React.FunctionComponent<Props> = ({
   onToggleVideoSize = () => {},
   url,
 }) => {
+  const { 0: isHover, 1: handleHover } = useState(isHoverProps)
 
-  const { 0: isHover, 1: handleHover } = useState(true)
+  const handleMouseEnter = debounce(() => handleHover(true))
+  const handleMouseLeave = debounce(() => {
+    handleHover(false)
+  }, LEAVE_DELAY)
 
-  const handleMouseEnter: React.MouseEventHandler<HTMLDivElement> = () => handleHover(true)
-  const handleMouseLeave: React.MouseEventHandler<HTMLDivElement> = () => handleHover(true)
-
+  // * isHover 프로퍼티 변경 시 컨트롤러 영역 활성/비활성 처리
   useEffect(() => {
-    isControllable && setTimeout(() => handleHover(false), 1000)
-  }, [handleHover, isControllable])
+    handleHover(isHoverProps)
+  }, [isHoverProps])
+
+  // * 컨트롤러 영역이 노출 후 자동 hide 처리
+  useEffect(() => {
+    isControllable && isUseHover && handleMouseLeave()
+  }, [])
 
   return (
     <PlayerProvider
@@ -76,7 +91,7 @@ const App: React.FunctionComponent<Props> = ({
     >
       <Wrapper
         className={className}
-        {...isControllable && {
+        {...isControllable && isUseHover && {
           onMouseEnter: handleMouseEnter,
           onMouseLeave: handleMouseLeave,
         }}
