@@ -21,11 +21,15 @@ const Wrapper = styled.div`
   border-radius: .25rem;
   line-height: 1;
   text-align: center;
-  span {
-    font-size: .8rem;
-    line-height: 1;
+  height: 24px;
+  line-height: 0;
+  .time__text {
+    font-size: 0.75rem;
+    line-height: 1.167;
     color: #ffffff;
-    vertical-align: middle;
+    margin-top: 12px;
+    transform: translateY(-51.4%);
+    display: inline-block;
   }
 `
 
@@ -40,9 +44,9 @@ export default memo(({ className, remainTime: remainTimeProp }: Props) => {
     }
   }, [])
   return (
-    <Wrapper className={className}>
-      <div>
-        <span>{getDateFromUTC(remainTime).getString()}</span>
+    <Wrapper className={`time ${className}`}>
+      <div className="time__text">
+        {getDateFromUTC(remainTime).getString()}
       </div>
     </Wrapper>
   )
