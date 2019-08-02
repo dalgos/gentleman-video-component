@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import classnames from 'classnames'
 
 import { usePlayerStateValue } from '../context'
-import HLSVideo from '../components/HLSVideo'
+import HLSVideo, { Props as HLSVideoProps } from '../components/HLSVideo'
 
 export interface Props {
   width?: string;
@@ -11,6 +11,8 @@ export interface Props {
   maxWidth?: string;
   maxHeight?: string;
   isMaximized?: boolean;
+  onFragChange?: HLSVideoProps['onFragChange'];
+  onFragParsingMetaData?: HLSVideoProps['onFragParsingMetaData'];
 }
 
 interface StyledVideoProps {
@@ -42,6 +44,8 @@ const Video: React.FunctionComponent<Props> = ({
   maxWidth = '416px',
   width = '416px',
   height = '416px',
+  onFragChange,
+  onFragParsingMetaData,
 }) => {
   const [{ isMuted, isVideoMaximized, url, volume }] = usePlayerStateValue()
 
@@ -55,6 +59,8 @@ const Video: React.FunctionComponent<Props> = ({
       className={classnames({ extended: isVideoMaximized })}
       url={url}
       isMute={isMuted}
+      onFragChange={onFragChange}
+      onFragParsingMetaData={onFragParsingMetaData}
       volume={volume}
     />
   )

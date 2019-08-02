@@ -4,15 +4,15 @@ import ID3 from 'utils/id3'
 
 const hlsConfig = {}
 
-type FragChangeEventHandler = (url: string) => void;
-type FragParsingMetadataEventHandler = (url: string, timestamp: string) => void;
+type FragChangeEventHandler = (url: string) => void
+type FragParsingMetadataEventHandler = (url: string, timestamp: string) => void
 
-interface Props {
+export interface Props {
   className: string;
   id: string;
   isMute: boolean;
   onFragChange?: FragChangeEventHandler;
-  onFragParsingMetadata?: FragParsingMetadataEventHandler;
+  onFragParsingMetaData?: FragParsingMetadataEventHandler;
   url: string;
   volume: number;
 }
@@ -21,7 +21,7 @@ const { useEffect, useRef } = React
 
 interface CreateHLSParams {
   onFragChange?: (url: string) => void;
-  onFragParsingMetadata?: (url: string, timestamp: string) => void;
+  onFragParsingMetaData?: (url: string, timestamp: string) => void;
   url: string;
   videoElement: HTMLVideoElement;
 }
@@ -43,7 +43,7 @@ function getID3Frames(samples: Array<{ data: Uint8Array }> = []): Array<{ key: s
 // hls instance 생성
 function createHLS({
   onFragChange,
-  onFragParsingMetadata,
+  onFragParsingMetaData,
   url,
   videoElement,
 }: CreateHLSParams): HLS {
@@ -55,12 +55,12 @@ function createHLS({
   })
   onFragChange
     && hls.on(HLSEvents.FRAG_CHANGED, (_, { frag }: { frag: ChangedFragment }) => onFragChange(frag.relurl || ''))
-  onFragParsingMetadata
+  onFragParsingMetaData
     && hls.on(HLSEvents.FRAG_PARSING_METADATA, (_, { frag, samples = [] }: FragParsingMetatdataData) => {
 
       const { 0: { data } } = getID3Frames(samples)
       data && frag.relurl
-        && onFragParsingMetadata(frag.relurl, JSON.parse(data)['server-timestamp'])
+        && onFragParsingMetaData(frag.relurl, JSON.parse(data)['server-timestamp'])
 
     })
   return hls
@@ -71,15 +71,21 @@ const HLSVideo: React.FunctionComponent<Props> = ({
   id,
   isMute,
   onFragChange,
-  onFragParsingMetadata,
+  onFragParsingMetaData,
   url,
   volume,
 }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null)
 
   useEffect(() => {
-    videoRef.current && createHLS({ onFragChange, onFragParsingMetadata, url, videoElement: videoRef.current })
-  }, [onFragChange, onFragParsingMetadata, videoRef])
+    videoRef.current
+      && createHLS({
+        onFragChange,
+        onFragParsingMetaData,
+        url,
+        videoElement: videoRef.current
+      })
+  }, [onFragChange, onFragParsingMetaData, videoRef])
 
   useEffect(() => {
     if (videoRef.current) {

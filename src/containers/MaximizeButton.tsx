@@ -12,6 +12,8 @@ const StyledLottieButton = styled(LottieButton)`
   margin: 20px;
   box-sizing: border-box;
   padding: 0;
+  width: 24px;
+  height: 24px;
 `
 
 const MaximizeButton: React.FunctionComponent<Props> = () => {

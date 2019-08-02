@@ -4,25 +4,25 @@ import classnames from 'classnames'
 
 import { PlayerProvider } from './context'
 import Wrapper from './elements/Wrapper'
-import Video from './containers/Video'
+import Video, { Props as VideoProps } from './containers/Video'
 import TopControls from './containers/TopControls'
 import BottomControls from './containers/BottomControls'
 import { debounce } from 'lodash'
 
 export interface Props {
   className?: string;
-  endTime?: number;
-  isControllable?: boolean;
-  isHover?: boolean;
-  isMaximized?: boolean;
-  isUseHover?: boolean;
-  url: string;
-  width?: string;
-  maxWidth?: string;
-  height?: string;
-  maxHeight?: string;
-  videoHeight?: string;
-  videoWidth?: string;
+  endTime?: number; // 방송종료 예정시간
+  isControllable?: boolean; // 상하단 컨트롤러 사용여부. false 인 경우 컨트롤러 비노출
+  isHover?: boolean;  // hover 상태 속성
+  isMaximized?: boolean; // 플레이어 영역 확장 상태
+  isUseHover?: boolean; // hover 이벤트를 플레이어 외부에서 제어할 수 있는 속성
+  url: string; // 비디오 URL
+  width?: string; // 비디오 넓이
+  maxWidth?: string; // 비디오 최대 넓이 -> maximize 기능용
+  height?: string; // 비디오 높이
+  maxHeight?: string; // 비디오 최대 높이 -> maximize 기능용
+  onFragChange?: VideoProps['onFragChange'];
+  onFragParsingMetaData?: VideoProps['onFragParsingMetaData'];
   onToggleVideoSize?: (isMaximized?: boolean) => void;
 }
 
@@ -58,15 +58,15 @@ const App: React.FunctionComponent<Props> = ({
   maxHeight,
   width,
   maxWidth,
+  onFragChange,
+  onFragParsingMetaData,
   onToggleVideoSize = () => {},
   url,
 }) => {
   const { 0: isHover, 1: handleHover } = useState(isHoverProps)
 
   const handleMouseEnter = debounce(() => handleHover(true))
-  const handleMouseLeave = debounce(() => {
-    handleHover(false)
-  }, LEAVE_DELAY)
+  const handleMouseLeave = debounce(() => handleHover(false), LEAVE_DELAY)
 
   // * isHover 프로퍼티 변경 시 컨트롤러 영역 활성/비활성 처리
   useEffect(() => {
@@ -104,6 +104,8 @@ const App: React.FunctionComponent<Props> = ({
           maxWidth={maxWidth}
           height={height}
           maxHeight={maxHeight}
+          onFragChange={onFragChange}
+          onFragParsingMetaData={onFragParsingMetaData}
         />
         {isControllable &&
           <StyledBottomControls className={classnames({ active: isHover })} />
