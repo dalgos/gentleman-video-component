@@ -65,6 +65,7 @@
         "@types/react-lottie": "^1.2.2",
         "hls.js": "^0.12.4",
         "in-publish": "^2.0.0",
+        "lottie-web": "^5.5.7",
         "react-lottie": "^1.2.3"
     },
     "peerDependencies": {
