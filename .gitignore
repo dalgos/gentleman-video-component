@@ -65,3 +65,6 @@ dist
 
 # .rtp
 .rpt2_cache
+
+# Mac
+.DS_Store
