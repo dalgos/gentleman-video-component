@@ -97,7 +97,7 @@ const App: React.FunctionComponent<Props> = ({
         }}
       >
         {isControllable &&
-          <StyledTopControls className={classnames({ active: isHover })} />
+          <StyledTopControls className={classnames({ active: true })} />
         }
         <Video
           width={width}
