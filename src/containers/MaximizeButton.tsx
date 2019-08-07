@@ -1,14 +1,14 @@
-import * as React from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 import { usePlayerStateValue } from '../context'
-import maximizeAnimationData from '../assets/json/ic_maximise_w_24.json'
-import minimizeAnimationData from '../assets/json/ic_minimize_w_24.json'
-import LottieButton from '../components/LottieButton'
+import onAnimationData from '../assets/json/ic_maximise_w_24.json'
+import offAnimationData from '../assets/json/ic_minimize_w_24.json'
+import LottieToggleButton from 'modules/lottie-button'
 
 interface Props {}
 
-const StyledLottieButton = styled(LottieButton)`
+const StyledLottieButton = styled(LottieToggleButton)`
   margin: 20px;
   box-sizing: border-box;
   padding: 0;
@@ -26,22 +26,9 @@ const MaximizeButton: React.FunctionComponent<Props> = () => {
 
   return (
     <StyledLottieButton
+      name="maximize-button"
+      animationDatas={[onAnimationData, offAnimationData]}
       onClick={handleClick}
-      playAniData={minimizeAnimationData}
-      reverseAniData={maximizeAnimationData}
-      isPlayed={isVideoMaximized}
-      width={24}
-      height={24}
-      options={{
-        animationData: minimizeAnimationData,
-        autoplay: false,
-        loop: false,
-        rendererSettings: {
-          preserveAspectRatio: 'xMidYMid slice'
-        }
-      }}
-      isStopped={true}
-      isClickToPauseDisabled={true}
     />
   )
 }
