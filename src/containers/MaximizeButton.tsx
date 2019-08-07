@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { usePlayerStateValue } from '../context'
-import onAnimationData from '../assets/json/ic_maximise_w_24.json'
-import offAnimationData from '../assets/json/ic_minimize_w_24.json'
+import onAnimationData from '../assets/json/ic_minimize_w_24.json'
+import offAnimationData from '../assets/json/ic_maximise_w_24.json'
 import LottieToggleButton from 'modules/lottie-button'
 
 interface Props {}
