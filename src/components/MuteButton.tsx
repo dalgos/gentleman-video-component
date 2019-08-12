@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler, useCallback, useEffect, useState } from 'react'
+import React, { FC, MouseEventHandler, useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import Lottie, { Options as LottieOptions } from 'react-lottie'
 import classnames from 'classnames'
@@ -64,41 +64,15 @@ const MuteButton: FC<Props> = ({
   volume,
 }) => {
 
-  // const { 0: { lottieOptions }, 1: setState } = useState<{
-  //   lottieOptions: LottieOptions;
-  // }>({
-  //   lottieOptions: {
-  //     animationData: volumeOffAniData,
-  //     autoplay: true,
-  //     loop: false,
-  //     rendererSettings: {
-  //       preserveAspectRatio: 'xMidYMid slice',
-  //     },
-  //   },
-  // })
-
-  // useEffect(() => {
-  //   setState((prevState) => ({
-  //     aniVisible: true,
-  //     lottieOptions: {
-  //       ...prevState.lottieOptions,
-  //       animationData: (isMuted || volume === 0) ? volumeOffAniData : volumeOnAniData,
-  //       autoPlay: true,
-  //     }
-  //   }))
-  // }, [isMuted, volume])
-
-  const { 0: { isPlay, imgSrcIndex }, 1: setConfig } = useState({
+  const { 0: config, 1: setConfig } = useState({
     imgSrcIndex: 0,
+    isMuted: true,
     isPlay: false,
+    volume,
   })
 
   const clickHandler: React.MouseEventHandler<HTMLButtonElement> = (evt) => {
-    setConfig((prevConfig) => ({
-      ...prevConfig,
-      isPlay: true,
-    }))
-    onClick && onClick(evt)
+    !isMuted && volume === 0 || onClick && onClick(evt)
   }
 
   const completeHandler = () => {
@@ -108,6 +82,22 @@ const MuteButton: FC<Props> = ({
       isPlay: false,
     }))
   }
+
+  useEffect(() => {
+    setConfig((prevConfig) => {
+      // 애니메이션 플레이 기준 구분
+      if (prevConfig.isMuted !== isMuted || prevConfig.volume === 0 && volume > 0 || prevConfig.volume > 0 && volume === 0) {
+        return {
+          ...prevConfig,
+          imgSrcIndex: isMuted ? 1 : (volume === 0 ? 1 : 0),
+          isMuted,
+          isPlay: true,
+          volume,
+        }
+      }
+      return prevConfig
+    })
+  }, [isMuted, volume])
 
   // TODO: 음소거 활성/비활성 Lottie 애니메이션 처리 필요
   return (
@@ -119,11 +109,11 @@ const MuteButton: FC<Props> = ({
         volume={volume}
       /> */}
       <Sequences
-        imgSrc={imgSrcs[imgSrcIndex].imgSrc}
+        imgSrc={imgSrcs[config.imgSrcIndex].imgSrc}
         width={24}
         height={24}
-        isPlay={isPlay}
-        frames={imgSrcs[imgSrcIndex].frames}
+        isPlay={config.isPlay}
+        frames={imgSrcs[config.imgSrcIndex].frames}
         onComplete={completeHandler}
       />
 

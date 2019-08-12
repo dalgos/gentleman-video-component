@@ -93,7 +93,7 @@ const VolumeRange: React.FunctionComponent<Props> = ({
   const handleMouseMove = (evt: MouseEvent) => {
     if (sliderRef && sliderRef.current) {
       const domRect = sliderRef.current.getBoundingClientRect() as DOMRect
-      const volume = getVolume(evt.clientX, domRect.x, 0, domRect.width - 12)
+      const volume = getVolume(evt.clientX, domRect.left, 0, domRect.width - 12)
       updateVolume(volume / SLIDER_WIDTH)
       onVolumeChange && onVolumeChange(volume / SLIDER_WIDTH)
     }
