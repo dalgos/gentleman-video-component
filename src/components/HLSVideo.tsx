@@ -78,19 +78,19 @@ const HLSVideo: React.FunctionComponent<Props> = ({
   const videoRef = useRef<HTMLVideoElement | null>(null)
 
   useEffect(() => {
-    videoRef.current
-      && createHLS({
-        onFragChange,
-        onFragParsingMetaData,
-        url,
-        videoElement: videoRef.current
-      })
-  }, [onFragChange, onFragParsingMetaData, videoRef])
+    const hls = createHLS({
+      onFragChange,
+      onFragParsingMetaData,
+      url,
+      videoElement: videoRef.current as HTMLVideoElement,
+    })
+    return () => {
+      hls.destroy()
+    }
+  }, [])
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.volume = volume
-    }
+    (videoRef.current as HTMLVideoElement).volume = volume
   }, [volume])
 
   return (

@@ -6,6 +6,7 @@ const Wrapper =  styled.div`
   height: 100%;
   overflow: hidden;
   border-radius: .5rem;
+  background-color: #e6e6e6;
 `
 
 export default Wrapper
