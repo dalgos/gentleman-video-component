@@ -1,6 +1,6 @@
 {
     "name": "@gentlemen/live-player",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "description": "React Video Component",
     "main": "dist/index.js",
     "module": "dist/index.es.js",
