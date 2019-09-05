@@ -116,3 +116,5 @@ const App: React.FunctionComponent<Props> = ({
 }
 
 export default App
+
+export { isSupported } from 'hls.js'
