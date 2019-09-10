@@ -11,19 +11,34 @@ import { debounce } from 'lodash'
 
 export interface Props {
   className?: string;
-  endTime?: number; // 방송종료 예정시간
-  isControllable?: boolean; // 상하단 컨트롤러 사용여부. false 인 경우 컨트롤러 비노출
-  isHover?: boolean;  // hover 상태 속성
-  isMaximized?: boolean; // 플레이어 영역 확장 상태
-  isUseHover?: boolean; // hover 이벤트를 플레이어 외부에서 제어할 수 있는 속성
-  url: string; // 비디오 URL
-  width?: string; // 비디오 넓이
-  maxWidth?: string; // 비디오 최대 넓이 -> maximize 기능용
-  height?: string; // 비디오 높이
-  maxHeight?: string; // 비디오 최대 높이 -> maximize 기능용
+  /** 방송종료 예정시간 */
+  endTime?: number;
+  /** 상하단 컨트롤러 사용여부. false 인 경우 컨트롤러 비노출 */
+  isControllable?: boolean;
+  /** hover 상태 속성 */
+  isHover?: boolean;
+  /** 플레이어 영역 확장 상태 */
+  isMaximized?: boolean;
+  /** hover 이벤트를 플레이어 외부에서 제어할 수 있는 속성 */
+  isUseHover?: boolean;
+  /** 비디오 URL */
+  url: string;
+  /** 비디오 넓이 */
+  width?: string;
+  /** 비디오 최대 넓이 -> maximize 기능용 */
+  maxWidth?: string;
+  /** 비디오 높이 */
+  height?: string;
+  /** 비디오 최대 높이 -> maximize 기능용 */
+  maxHeight?: string;
+  /** 비디오 fragment 변경 이벤트 핸들러 */
   onFragChange?: VideoProps['onFragChange'];
+  /** fragment의 metadata 변경 이벤트 핸들러 */
   onFragParsingMetaData?: VideoProps['onFragParsingMetaData'];
+  /** 비디오 컨테이너 사이즈 변경 이벤트 핸들러 */
   onToggleVideoSize?: (isMaximized?: boolean) => void;
+  /** 화면에 표시되는 시청자 수 */
+  viewCount?: number | string;
 }
 
 const { useEffect, useState } = React
@@ -61,6 +76,7 @@ const App: React.FunctionComponent<Props> = ({
   onFragChange,
   onFragParsingMetaData,
   onToggleVideoSize = () => {},
+  viewCount,
   url,
 }) => {
   const { 0: isHover, 1: handleHover } = useState(isHoverProps)
@@ -97,7 +113,10 @@ const App: React.FunctionComponent<Props> = ({
         }}
       >
         {isControllable &&
-          <StyledTopControls className={classnames({ active: true })} />
+          <StyledTopControls
+            className={classnames({ active: true })}
+            viewCount={viewCount}
+          />
         }
         <Video
           width={width}

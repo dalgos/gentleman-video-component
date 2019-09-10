@@ -13,23 +13,19 @@ const { memo, useEffect, useState } = React
 
 const Wrapper = styled.div`
   background-color: #F27935;
-  height: 1.5rem;
+  height: 28px;
   min-width: 70px;
+  padding: 5px 12px;
   display: inline-block;
   text-align: center;
-  font-size: 1.5rem;
   border-radius: .25rem;
-  line-height: 1;
   text-align: center;
-  height: 24px;
-  line-height: 0;
+  box-sizing: border-box;
+  font-size: 0.75rem;
+  display: table;
   .time__text {
-    font-size: 0.75rem;
-    line-height: 1.167;
     color: #ffffff;
-    margin-top: 12px;
-    transform: translateY(-51.4%);
-    display: inline-block;
+    display: table-cell;
   }
 `
 
