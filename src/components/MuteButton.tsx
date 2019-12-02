@@ -51,6 +51,7 @@ const Button = styled.button`
   box-sizing: border-box;
   padding: 12px;
   float: left;
+  background: none;
 `
 
 const imgSrcs = [

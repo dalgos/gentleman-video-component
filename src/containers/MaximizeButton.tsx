@@ -6,17 +6,18 @@ import onAnimationData from '../assets/json/ic_minimize_w_24.json'
 import offAnimationData from '../assets/json/ic_maximise_w_24.json'
 import LottieToggleButton from 'modules/lottie-button'
 
-interface Props {}
-
 const StyledLottieButton = styled(LottieToggleButton)`
   margin: 20px;
   box-sizing: border-box;
   padding: 0;
   width: 24px;
   height: 24px;
+  background: none;
+  outline: none;
+  border: 0;
 `
 
-const MaximizeButton: React.FunctionComponent<Props> = () => {
+const MaximizeButton: React.FunctionComponent = () => {
   const [{ isVideoMaximized, onToggleVideoSize }, dispatch] = usePlayerStateValue()
 
   const handleClick = React.useCallback<React.MouseEventHandler<HTMLButtonElement>>(() => {
